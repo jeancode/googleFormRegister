@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Form Pure</title>
+    <style>
+        body{
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+            margin:0px;
+        }
+        input:focus{
+            outline-color: /*turqueza*/ #1195f3;
+            outline-width: 2px;
+            outline-style: solid;
+            transition: all .1s linear;
+        }
+        #contenido{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+            position:fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #contenidoForm{
+            width: 750px;
+            height: 600px;
+            background: white;
+            border:1px solid rgb(216, 216, 216);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;;
+        }
+        #formContenteInput{
+            flex:1;
+            width:calc(100% - 20px);
+            height: 100%;
+            padding-top: 10px;
+        
+            padding-left: 25px;
+            padding-right: 25px;
+            
+        }
+        #formContenteImage{
+            flex:0.8;
+            width:100px;
+            height: 100%;
+            background: white;
+            background-image: url('./images/account.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+        .formItemInput{
+            width: 100%;
+            
+      
+        }
+        .formItemIcon{
+            width:100%;
+            height:80px;
+            background-image: url('./images/icon.svg');
+            background-repeat: no-repeat;
+            background-position: 30px center;
+            
+        }
+        .FormItemInputUser{
+            
+            background: rgb(255, 255, 255);
+            
+            
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between
+        }
+        .FormItemInputUser input{
+            flex: 1;;
+            height: 35px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            max-width: calc(50% - 20px);
+            border-radius: 3px;;
+            border:none;
+            border:1px solid rgb(162, 162, 162);
+            padding-left: 8px;
+            
+        }
+        /* contexto global*/
+        .subTitle{
+            font-size: 20px;
+            color: black;
+        }
+        .fromItemInputEmail{
+            
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 1px;
+            padding-right: 1px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .fromItemInputEmail input{
+            width: calc(100% - 10px);
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 100px;
+            border-radius: 5px;
+            border:none;
+            border:1px solid rgb(162, 162, 162);
+            
+        }
+        .dialogEmail{
+           
+            background: white;
+            position: absolute;
+            font-size: 15px;
+            top:18px;
+            right: 10px;
+        }
+        .formItemInput .label1{
+            padding-top: 1px;
+            padding-bottom: 5px;
+            
+        }
+        .label1{
+            font-size: 12px;
+            color: black;
+  
+        }
+        .label2{
+            color:rgb(57, 169, 255);
+            font-size: 15px;
+            font-style:bold;
+            font-weight: bold;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .InputPassword input{
+            margin: 0px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .InputPassword{
+            padding-bottom: 0px;
+        }
+        /*checbok style checkbox*/
+        .formItemInput .checkbox{
+            
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+            
+        }
+        .checkbox{
+            display: flex;
+            flex-direction: row;
+            height: 30px;
+            align-items: center;
+        }
+        
+        .checkboxLabel{
+            margin-left: 10px;
+        }
+        .btnSiguiente{
+            /*rutqueza color*/
+            background-color: rgb(57, 169, 255);
+            color: white;
+            border-radius: 5px;
+            border:none;
+            width: 50%;
+            height: 40px;
+            font-size: 15px;
+            font-weight: bold;
+            -webkit-transition: all 0.3s ease-in-out;
+        }
+        .btnSiguiente:hover{
+            background-color: rgb(49, 84, 110);
+            color: white;
+            border-radius: 5px;
+            border:none;
+            width: 50%;
+            height: 40px;
+            font-size: 15px;
+            font-weight: bold;
+            -webkit-transition: all 0.3s ease-in-out;
+        }
+   
+        .botonSend{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            position: relative;
+            margin-top: 40px;
+            margin-bottom: 10px;
+
+        }
+        
+        .foodFormSession{
+            
+            height: 60px;
+            width: 750px;
+            display: flex;
+            flex-direction: row;
+
+        }
+        .foodFormSessionLenguaje{
+            flex:1;
+
+            display: flex;
+            align-items: center;
+        }
+        .foodFormSessionLenguaje select{
+            border:none;
+            width: 100px;
+            height: 30px;
+            
+        }
+        .foodFormSessionLenguaje select:hover{
+            text-decoration: underline;
+        }
+        .listLinks{
+            flex: 0.5;;
+            
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .listLinksItems{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            -webkit-user-select: none;
+        }
+        .listLinksItems:hover{
+            text-decoration: underline;
+            cursor: default;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="contenido">
+
+        <div id="contenidoForm">
+
+            <div id="formContenteInput">
+                <div class="formItemInput">
+
+                    <div class="formItemIcon"></div>
+
+                </div>
+
+                <div class="formItemInput">
+
+                    <div class="subTitle">Crear una Cuenta de Google</div>
+                </div>
+
+                <div class="formItemInput">
+
+                    <div class="FormItemInputUser">
+
+                        <input type="text" placeholder="Nombre">
+                        <input type="text" placeholder="Apellidos">
+    
+
+                    </div>
+                </div>
+
+                <div class="formItemInput">
+                    <div class="fromItemInputEmail">
+                        <div class="dialogEmail">@gmail.com</div>
+                        <input type="text" placeholder="Nombre de usuario">
+                    </div>
+                </div>
+                <div class="formItemInput">
+                    <div class="label1">Puedes Utilizar letras,Números y putos</div>
+                </div>
+                <div class="formItemInput">
+                    <div class="label2">Prefiero usar mi dirección de correo electrónico actual</div>
+                </div>
+                
+                <div class="formItemInput">
+                    <div class="FormItemInputUser InputPassword">
+                        <input type="password" placeholder="Contraseña">
+                        <input type="password" placeholder="Confiramacion">
+                    </div>
+                </div>
+                <div class="formItemInput">
+                    <div class="label1">Utiliza ocho caracteres como mínimo con una combinacion letras,números y símbolos</div>    
+                </div>  
+                <div class="formItemInput checkbox">
+                    <!--Checkbox-->
+                    
+
+                        <input type="checkbox" name="checkbox" id="checkbox">
+                        <div class="checkboxLabel">Mostrar Contraseña</div>
+
+                </div>
+
+                <div class="formItemInput botonSend">
+
+           
+                        <button class="btnSiguiente">Siguiente</button>
+                       
+                   
+                </div>
+                    
+
+            </div>
+            <div id="formContenteImage">
+
+
+            </div>
+
+        </div>
+        
+        <div class="foodFormSession">
+
+            <div class="foodFormSessionLenguaje">
+                <!--select con 3 opciones-->
+                <select>
+                    <option value="es">Español</option>
+                    <option value="en">Ingles</option>
+                    <option value="fr">Frances</option>
+                </select>
+
+
+            </div>
+
+            <div class="listLinks" >
+
+                <div class="listLinksItems">
+                    Ayuda
+                </div>
+                <div class="listLinksItems">
+                    Términos
+                </div>
+                <div class="listLinksItems">
+                    Privacidad
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
